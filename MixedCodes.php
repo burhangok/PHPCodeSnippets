@@ -10,4 +10,23 @@ $imagePath=explode (",",$imageText);
 
 echo $imagePath[0];
 
+
+
+
+/*
+Get List Dates Between 2 Date.
+*/
+
+$startdate=strtotime(date('Y-m-d'));
+$enddate=strtotime("+15 day", $startdate);
+
+while ($startdate < $enddate) {
+    
+    echo "Date: ".date("d M", $startdate);
+    echo "<br/>";
+    echo "Day: ".date("l", $startdate);
+    echo "<br/>";
+        
+    $startdate = strtotime("+1 day", $startdate);
+} 
 ?>
