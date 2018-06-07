@@ -29,4 +29,42 @@ while ($startdate < $enddate) {
         
     $startdate = strtotime("+1 day", $startdate);
 } 
+
+
+
+
+/*
+Find all ZIP Codes within Mile With Curl
+*/
+$curl=curl_init('https://www.zip-codes.com/zip-code-radius-finder.asp?sn=distance&so=asc&zip1='.$shop_pin_code.'&zipMilesLow=0&zipMilesHigh='.$far_mil.'&country=0&print=true');   
+ 
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+ 
+$data=curl_exec($curl);
+ 
+$mathces=array();
+ 
+preg_match_all("'<td class=a>(.*?)</td>'si", $data, $mathces);
+ 
+$taskerzipCodes="";
+
+$numberOfZipCodes = 0;
+ 
+for($i = 1; $i < count($mathces[0],1) ;  $i += 8) {
+
+$firstZipCode=$mathces[0][$i];
+
+$taskerzipCodes.=",".strip_tags($firstZipCode);
+$numberOfZipCodes+=1;
+}
+
+
+//echo $numberOfZipCodes;
+ 
+curl_close($curl);
+
+/* Find all ZIP Codes within Mile With Curl - END */
+
+
+
 ?>
